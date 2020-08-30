@@ -1,3 +1,2 @@
 cd C:\workspaces\chatting
-npm start
-pause
+pm2 start app.js --watch
