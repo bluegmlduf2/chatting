@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 
-var app = require('../app');
+var app = require('../app');//가장 처음 app.js의 내용을 호출 한 후 내용을 불러온다.(즉 app.js내용이 실행후 www가 실행되는것)
 var debug = require('debug')('chatting:server');
 var http = require('http');
 
@@ -20,6 +20,7 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
+app.io.attach(server);
 
 /**
  * Listen on provided port, on all network interfaces.

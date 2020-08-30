@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-	 "start": "pm2 start ./bin/www --watch",
-	 "stop": "pm2 stop ./bin/www"
+    "start": "pm2 start ./bin/www --watch",
+    "stop": "pm2 stop ./bin/www"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -16,6 +16,7 @@
     "helmet": "^4.1.0",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
-    "request": "^2.88.2"
+    "request": "^2.88.2",
+    "socket.io": "^2.3.0"
   }
 }
