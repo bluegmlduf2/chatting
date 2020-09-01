@@ -44,6 +44,13 @@ a {text-decoration:none;color:inherit;}
   left:5px;
   border-radius: 10px;
 }
+#chattingSpace{
+  width:570px;
+  height:470px;
+  overflow-wrap: break-word; /* div문자열개행 */
+  padding: 0px 20px 0px 10px;
+  overflow:auto;  /* 스크롤바 유동적으로 생김 */
+}
 .container .chat .sendBox{
   position:absolute;
   width:30px;
@@ -78,4 +85,8 @@ input[type="text"]{
   font-size: 15px;
   cursor: pointer;
   border-radius: 10px;
+}
+/* placeholder클릭시 힌트 사라짐 */
+input:focus::-webkit-input-placeholder {
+  color:transparent; 
 }

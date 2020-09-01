@@ -7,7 +7,6 @@ const http =require('http');//nodeJs에서 제공하는 서버 모듈
 const socket=require('socket.io');//소켓모듈
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 
 const server=http.createServer(app);//express Http 서버 생성
 const io=socket(server);//서버를 소켓에 연결한 후 io를 받아옴
@@ -53,18 +52,18 @@ io.sockets.on('connection',function(socket){
   socket.on('newUser',function(data){
     console.log('userName::'+data.user);
     socket.name=data.user;//해당 소켓의 name 변수에 사용자 이름 저장(개인소켓에 전역변수)
-    io.sockets.emit('update',{message:"SERVER: "+data.user+"님이 접속하셨습니다."});//본인 포함, 모든 유저(sockets)에게 전송
+    io.sockets.emit('update',{code:'0',message:"SERVER: "+data.user+"님이 접속하셨습니다."});//본인 포함, 모든 유저(sockets)에게 전송
   });
 
   //main.js에서 send라는 키값으로 emit을 이용하여 전송함
   socket.on('send',function(data){
     data.name=socket.name;//data변수로 main.js에서 메세지를 받으면 해당 data 변수안에 name이라는 키값을 추가하고 newUser에서 지정한 name을 넣어줌 
-    socket.broadcast.emit('update',{message:data.name+": "+data.message});//본인 제외, 모든 유저에게 전송. io.socket.emit()의 반대
+    io.sockets.emit('update',{code:'1',message:data.name+": "+data.message});
   });
 
   //소켓의 정보가 연결종료일 경우
   socket.on('disconnect',function(){
-    socket.broadcast.emit('update',{message:"SERVER: "+socket.name+"님이 나가셨습니다."});
+    socket.broadcast.emit('update',{code:'2',message:"SERVER: "+socket.name+"님이 나가셨습니다."});//본인 제외, 모든 유저에게 전송. io.socket.emit()의 반대
     console.log('End connection..');
   })
 })
